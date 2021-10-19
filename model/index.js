@@ -1,15 +1,21 @@
 const fs = require('fs/promises')
 const path = require('path')
-const contacts = require('./contacts.json')
+const { Contact } = require('../db/contactModel')
+// const contacts = require('./contacts.json')
+
 const { v4 } = require('uuid')
 
 const contactsPath = path.join(__dirname, 'contacts.json')
 
-const listContacts = async () => contacts
+// const listContacts = async () => contacts
+const listContacts = async () => {
+  const contacts = await Contact.find({})
+  return contacts
+}
 
 const getContactById = async (contactId) => {
   const contacts = await listContacts()
-  const contactIndex = contacts.findIndex(contact => contact.id.toString() === contactId.toString())
+  const contactIndex = contacts.findIndex(({ _id }) => _id.toString() === contactId.toString())
 
   if (contactIndex === -1) {
     return null
