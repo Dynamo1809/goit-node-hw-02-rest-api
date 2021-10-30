@@ -14,11 +14,9 @@ const authenticate = async (req, _, next) => {
   
   try {
     const { id } = jwt.verify(token, SECRET_KEY)
-    console.log("🚀 ~ id", id)
     const user = await User.findById(id)
-    console.log("🚀 ~ file: authenticate.js ~ line 19 ~ authenticate ~ user", user)
     
-    if (!user) {
+    if (!user || !user.token) {
       throw new Unauthorized('Invalid token')
     }
     req.user = user

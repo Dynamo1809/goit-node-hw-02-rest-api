@@ -3,16 +3,9 @@ const { User } = require('../../models')
 
 const logout = async (req, res) => {
   const { _id: id } = req.user
-  console.log("🚀 ~ file: logout.js ~ line 6 ~ logout ~ id", id)
+  await User.findByIdAndUpdate(id, {token: null})
   
-  const user = await User.findById(id)
-  console.log("🚀 ~ file: logout.js ~ line 9 ~ logout ~ user", user)
-
-  if (!user) {
-    throw new Unauthorized('Not authorized')
-  }
-  
-  res.status(204).send()
+  res.status(204).json()
 }
 
 module.exports = logout
