@@ -2,7 +2,7 @@ const { NotFound } = require('http-errors')
 const { Contact } = require('../models/')
 
 const getAll = async (req, res) => {
-  const contacts = await Contact.find({})
+  const contacts = await Contact.find({owner: req.user._id}).populate('owner', 'email')
   res.json({
     status: 'success',
     code: 200,
@@ -14,7 +14,7 @@ const getAll = async (req, res) => {
 
 const getById = async (req, res) => {
   const { contactId } = req.params
-  const contact = await Contact.findById(contactId)
+  const contact = await Contact.findById(contactId).populate('owner', 'email')
   if (!contact) {
     throw new NotFound(`Contact with id: '${contactId}' not found`)
   }
@@ -28,7 +28,7 @@ const getById = async (req, res) => {
 }
 
 const add = async (req, res) => {
-  const result = await Contact.create(req.body)
+  const result = await Contact.create({ ...req.body, owner: req.user._id })
   res.status(201).json({
     status: 'success',
     code: 201,
