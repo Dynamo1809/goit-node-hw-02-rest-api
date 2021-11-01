@@ -10,6 +10,7 @@ const signup = async (req, res) => {
   }
 
   const newUser = new User({ email })
+  newUser.generateAvatar(email)
   newUser.setPassword(password)
   await newUser.save()
 
