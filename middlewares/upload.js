@@ -2,7 +2,6 @@ const multer = require('multer')
 const path = require('path')
 
 const tmpDir = path.join(__dirname, '../', 'tmp')
-console.log("🚀 ~ file: upload.js ~ line 5 ~ tmpDir", tmpDir)
 
 const uploadConfig = multer.diskStorage({
   destination: (req, file, cb) => {

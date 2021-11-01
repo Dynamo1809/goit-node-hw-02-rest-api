@@ -19,11 +19,11 @@ app.use('/api/auth', authRouter)
 app.use('/api/contacts', contactsRouter)
 app.use('/api/users', usersRouter)
 
-app.use((req, res) => {
+app.use((_, res) => {
   res.status(404).json({ message: 'Not found' })
 })
 
-app.use((err, req, res, next) => {
+app.use((err, _, res, __) => {
   const { status = 500, message = 'Server error' } = err
   res.status(status).json({ message })
 })

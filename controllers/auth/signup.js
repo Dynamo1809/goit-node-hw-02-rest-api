@@ -26,7 +26,4 @@ const signup = async (req, res) => {
   })
 }
 
-// const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-// await User.create({ email, password: hashPassword })
-
 module.exports = signup
