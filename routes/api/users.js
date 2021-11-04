@@ -5,9 +5,9 @@ const { users: ctrl } = require('../../controllers')
 
 const router = express.Router()
 
-router.get('/verify/:verificationToken', controllerWrapper(ctrl.verify))
+router.get('/verify/:verificationToken', controllerWrapper(ctrl.verificationToken))
 
-router.post('/verify')
+router.post('/verify', controllerWrapper(ctrl.verify))
 
 router.patch('/avatars', upload.single('avatar'), authenticate, controllerWrapper(ctrl.updateAvatar))
 

@@ -5,7 +5,6 @@ const { sendEmail } = require('../../helpers')
 const { User } = require('../../models')
 
 const { PORT } = process.env
-console.log("🚀 ~ file: signup.js ~ line 8 ~ PORT", PORT)
 
 const signup = async (req, res) => {
   const { password, email } = req.body
